@@ -159,6 +159,10 @@ Item {
                 else if (event.key === Qt.Key_Right) { root.moveMonth(1); event.accepted = true }
                 else if (event.key === Qt.Key_Home) { root.goToday(); event.accepted = true }
                 else if (event.key === Qt.Key_Slash && !root.fixedLocation) { cityInput.forceActiveFocus(); event.accepted = true }
+                else if (event.key === Qt.Key_Tab || event.key === Qt.Key_Backtab) {
+                    if (root.bar && typeof root.bar.switchPanelFrom === "function"
+                        && root.bar.switchPanelFrom(root.hostWidget, event.key === Qt.Key_Tab ? 1 : -1)) event.accepted = true
+                }
             }
             Flickable {
                 id: scroll
