@@ -152,6 +152,7 @@ Item {
             id: keyTarget
             anchors.fill: parent
             focus: true
+            Keys.priority: Keys.BeforeItem
             Keys.onEscapePressed: root.close()
             Keys.onPressed: function(event) {
                 if (cityInput.activeFocus || weatherSettings.editing) return
@@ -160,8 +161,11 @@ Item {
                 else if (event.key === Qt.Key_Home) { root.goToday(); event.accepted = true }
                 else if (event.key === Qt.Key_Slash && !root.fixedLocation) { cityInput.forceActiveFocus(); event.accepted = true }
                 else if (event.key === Qt.Key_Tab || event.key === Qt.Key_Backtab) {
-                    if (root.bar && typeof root.bar.switchPanelFrom === "function"
-                        && root.bar.switchPanelFrom(root.hostWidget, event.key === Qt.Key_Tab ? 1 : -1)) event.accepted = true
+                    var switched = false
+                    if (root.bar && typeof root.bar.switchPanelFrom === "function") {
+                        switched = root.bar.switchPanelFrom(root.hostWidget, event.key === Qt.Key_Tab ? 1 : -1)
+                    }
+                    if (switched) event.accepted = true
                 }
             }
             Flickable {

@@ -260,7 +260,7 @@ PanelWindow {
     // backing window becomes visible while keeping the compositor-wide
     // Exclusive phase imperceptibly short. This interval is covered by the
     // immediate hide/re-summon acceptance case.
-    interval: 75
+    interval: 400
     onTriggered: if (root.open) root.focusPrimed = true
   }
 
